@@ -19,7 +19,7 @@ abstract class PokedexRemoteService {
 
   @GET('/pokemon')
   Future<PokemonListResponseModel> getPokemonList({
+    @Query('offset') required int offset,
     @Query('limit') int limit = 25,
-    @Query('offset') int offset = 0,
   });
 }

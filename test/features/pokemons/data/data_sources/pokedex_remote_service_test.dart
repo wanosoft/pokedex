@@ -8,7 +8,7 @@ import 'package:pokedex/features/pokemons/data/models/pokemon_list_response_mode
 import 'package:pokedex/features/pokemons/data/models/pokemon_result_model.dart';
 
 void main() {
-  group('articles service', () {
+  group('pokedex remote service', () {
     late Dio dio;
     late DioAdapter dioAdapter;
     late PokedexRemoteService service;
