@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../features/all_pokemons/presentation/pokemons_screen.dart';
-import '../features/my_favorites/presentation/favorites_screen.dart';
-import '../features/pokemon_details/presentation/pokemon_details_screen.dart';
+import '../features/pokemons/presentation/favorites_screen.dart';
+import '../features/pokemons/presentation/pokemon_details_screen.dart';
+import '../features/pokemons/presentation/pokemons_screen.dart';
 import 'presentation/home_screen.dart';
 import 'presentation/routes.dart';
 
