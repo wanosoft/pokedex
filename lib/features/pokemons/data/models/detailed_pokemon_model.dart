@@ -184,11 +184,11 @@ class StatNameConverter implements JsonConverter<String, Map<String, dynamic>> {
 
 class PokemonTypesModelConverter
     implements
-        JsonConverter<List<PokemonTypeModel>, List<Map<String, dynamic>>> {
+        JsonConverter<List<PokemonTypeModel>, List<dynamic>> {
   const PokemonTypesModelConverter();
 
   @override
-  List<PokemonTypeModel> fromJson(List<Map<String, dynamic>> json) {
+  List<PokemonTypeModel> fromJson(List<dynamic> json) {
     return json.map((e) => PokemonTypeModel.fromJson(e)).toList();
   }
 
@@ -199,11 +199,11 @@ class PokemonTypesModelConverter
 }
 
 class PokemonMovesConverter
-    implements JsonConverter<List<String>, List<Map<String, dynamic>>> {
+    implements JsonConverter<List<String>, List<dynamic>> {
   const PokemonMovesConverter();
 
   @override
-  List<String> fromJson(List<Map<String, dynamic>> json) {
+  List<String> fromJson(List<dynamic> json) {
     return json.map((e) => e['move']['name'] as String).toList();
   }
 

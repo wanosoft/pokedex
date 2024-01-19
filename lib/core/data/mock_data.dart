@@ -27,11 +27,13 @@ const getPokemonDetailsJson = {
   'weight': pokemonWeight,
   'types': [
     {
+      'slot': 1,
       'type': {
         'name': 'grass',
       },
     },
     {
+      'slot': 2,
       'type': {
         'name': 'poison',
       },

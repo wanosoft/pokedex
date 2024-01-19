@@ -3,6 +3,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/data/remote_config.dart';
+import '../models/detailed_pokemon_model.dart';
 import '../models/pokemon_list_response_model.dart';
 
 part 'pokedex_remote_service.g.dart';
@@ -23,5 +24,8 @@ abstract class PokedexRemoteService {
     @Query('limit') int limit = 25,
   });
 
-  
+  @GET('/pokemon/{id}')
+  Future<DetailedPokemonModel> getPokemonDetails({
+    @Path('id') required String id,
+  });
 }

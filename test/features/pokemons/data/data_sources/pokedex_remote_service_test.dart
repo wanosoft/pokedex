@@ -4,6 +4,7 @@ import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:pokedex/core/data/mock_data.dart';
 import 'package:pokedex/core/data/remote_config.dart';
 import 'package:pokedex/features/pokemons/data/data_sources/pokedex_remote_service.dart';
+import 'package:pokedex/features/pokemons/data/models/detailed_pokemon_model.dart';
 import 'package:pokedex/features/pokemons/data/models/pokemon_list_response_model.dart';
 
 void main() {
@@ -43,6 +44,25 @@ void main() {
             (p0) => p0.results,
             'list',
             isA<List<PokemonResultModel>>(),
+          ),
+        );
+      });
+    });
+
+    group('get pokemon details', () {
+      test('should return detailed pokemon model', () async {
+        stubDio(path: '/pokemon/$pokemonId', data: getPokemonDetailsJson);
+
+        final response = await service.getPokemonDetails(
+          id: pokemonId.toString(),
+        );
+
+        expect(
+          response,
+          isA<DetailedPokemonModel>().having(
+            (p0) => p0.name,
+            'name',
+            equals(pokemonName),
           ),
         );
       });
