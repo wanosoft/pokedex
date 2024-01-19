@@ -25,7 +25,5 @@ abstract class PokedexRemoteService {
   });
 
   @GET('/pokemon/{id}')
-  Future<DetailedPokemonModel> getPokemonDetails({
-    @Path('id') required String id,
-  });
+  Future<DetailedPokemonModel> getPokemonDetailsById(@Path('id') String id);
 }

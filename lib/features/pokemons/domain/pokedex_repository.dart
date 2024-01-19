@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../data/data_sources/pokedex_remote_service.dart';
 import '../data/pokemons_repository_impl.dart';
+import 'entities/detailed_pokemon.dart';
 import 'entities/pokemon_list_response.dart';
 
 part 'pokedex_repository.g.dart';
@@ -23,4 +24,6 @@ abstract class PokedexRepository {
     required int offset,
     int limit = 25,
   });
+
+  Future<DetailedPokemon> getPokemonDetailsById(String id);
 }

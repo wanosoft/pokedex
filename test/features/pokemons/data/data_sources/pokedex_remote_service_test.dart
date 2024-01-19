@@ -53,8 +53,8 @@ void main() {
       test('should return detailed pokemon model', () async {
         stubDio(path: '/pokemon/$pokemonId', data: getPokemonDetailsJson);
 
-        final response = await service.getPokemonDetails(
-          id: pokemonId.toString(),
+        final response = await service.getPokemonDetailsById(
+          pokemonId.toString(),
         );
 
         expect(
