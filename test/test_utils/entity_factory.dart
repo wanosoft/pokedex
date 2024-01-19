@@ -1,6 +1,5 @@
 import 'package:pokedex/core/data/mock_data.dart';
 import 'package:pokedex/features/pokemons/domain/entities/pokemon_list_response.dart';
-import 'package:pokedex/features/pokemons/domain/entities/pokemon_result.dart';
 
 PokemonListResponse createPokemonListResponse({
   int? maxCount,

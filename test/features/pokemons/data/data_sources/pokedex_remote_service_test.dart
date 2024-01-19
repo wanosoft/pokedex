@@ -5,7 +5,6 @@ import 'package:pokedex/core/data/mock_data.dart';
 import 'package:pokedex/core/data/remote_config.dart';
 import 'package:pokedex/features/pokemons/data/data_sources/pokedex_remote_service.dart';
 import 'package:pokedex/features/pokemons/data/models/pokemon_list_response_model.dart';
-import 'package:pokedex/features/pokemons/data/models/pokemon_result_model.dart';
 
 void main() {
   group('pokedex remote service', () {

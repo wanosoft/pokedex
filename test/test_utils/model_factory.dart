@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pokedex/core/data/mock_data.dart';
+import 'package:pokedex/features/pokemons/data/models/detailed_pokemon_model.dart';
 import 'package:pokedex/features/pokemons/data/models/pokemon_list_response_model.dart';
-import 'package:pokedex/features/pokemons/data/models/pokemon_result_model.dart';
 
 final exception = Exception('test exception');
 
@@ -36,5 +36,25 @@ PokemonResultModel createPokemonResultModel({
   return PokemonResultModel(
     name: name ?? pokemonName,
     url: url ?? pokemonUrl,
+  );
+}
+
+DetailedPokemonModel createDetailedPokemonModel({
+  int? id,
+  String? name,
+  int? height,
+  int? weight,
+  List<PokemonTypeModel>? types,
+  List<PokemonMoveNameWrapperModel>? moves,
+  List<PokemonStatModel>? stats,
+}) {
+  return DetailedPokemonModel(
+    id: id ?? int.parse(pokemonId),
+    name: name ?? pokemonName,
+    height: height,
+    weight: weight,
+    types: types,
+    moves: moves,
+    stats: stats,
   );
 }

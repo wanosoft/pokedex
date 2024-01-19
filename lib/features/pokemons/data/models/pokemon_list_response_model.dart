@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/entities/pokemon_list_response.dart';
-import 'pokemon_result_model.dart';
 
 part 'pokemon_list_response_model.freezed.dart';
 part 'pokemon_list_response_model.g.dart';
@@ -22,4 +21,27 @@ class PokemonListResponseModel with _$PokemonListResponseModel {
         maxCount: maxCount,
         results: results.map((e) => e.toPokemonResult()).toList(),
       );
+}
+
+@freezed
+class PokemonResultModel with _$PokemonResultModel {
+  const PokemonResultModel._();
+
+  const factory PokemonResultModel({
+    required String name,
+    required String url,
+  }) = _PokemonResultModel;
+
+  factory PokemonResultModel.fromJson(Map<String, dynamic> json) =>
+      _$PokemonResultModelFromJson(json);
+
+  PokemonResult toPokemonResult() => PokemonResult(id: id, name: name);
+}
+
+extension PokemonModelX on PokemonResultModel {
+  String get id => url.split('/').reversed.elementAt(1);
+
+  /// TODO: Move this extension to presentation layer
+  String get imageUrl =>
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
 }
