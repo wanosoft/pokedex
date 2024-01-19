@@ -19,6 +19,15 @@ Future<PokemonListResponse> getPokemonList(GetPokemonListRef ref, int offset) {
   return repository.getPokemonList(offset: offset);
 }
 
+@riverpod
+Future<DetailedPokemon> getPokemonDetailsById(
+  GetPokemonDetailsByIdRef ref,
+  String id,
+) {
+  final repository = ref.watch(pokedexRepositoryProvider);
+  return repository.getPokemonDetailsById(id);
+}
+
 abstract class PokedexRepository {
   Future<PokemonListResponse> getPokemonList({
     required int offset,
