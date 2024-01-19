@@ -39,22 +39,36 @@ PokemonResultModel createPokemonResultModel({
   );
 }
 
+const grassPokemonTypeModel = PokemonTypeModel.grass;
+
+PokemonStatModel createPokemonStatModel({
+  int? baseStat,
+  int? effort,
+  String? statName,
+}) {
+  return PokemonStatModel(
+    baseStat: baseStat ?? pokemonBaseStat,
+    effort: effort ?? pokemonEffort,
+    statName: statName ?? pokemonStatName,
+  );
+}
+
 DetailedPokemonModel createDetailedPokemonModel({
   int? id,
   String? name,
   int? height,
   int? weight,
   List<PokemonTypeModel>? types,
-  List<PokemonMoveNameWrapperModel>? moves,
+  List<String>? moves,
   List<PokemonStatModel>? stats,
 }) {
   return DetailedPokemonModel(
-    id: id ?? int.parse(pokemonId),
+    id: id ?? pokemonId,
     name: name ?? pokemonName,
-    height: height,
-    weight: weight,
-    types: types,
-    moves: moves,
-    stats: stats,
+    height: height ?? pokemonHeight,
+    weight: weight ?? pokemonWeight,
+    types: types ?? [grassPokemonTypeModel],
+    moves: moves ?? [pokemonMoveName],
+    stats: stats ?? [createPokemonStatModel()],
   );
 }

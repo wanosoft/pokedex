@@ -22,4 +22,6 @@ abstract class PokedexRemoteService {
     @Query('offset') required int offset,
     @Query('limit') int limit = 25,
   });
+
+  
 }
