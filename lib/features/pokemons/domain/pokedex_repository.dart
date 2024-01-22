@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../data/data_sources/pokedex_remote_service.dart';
 import '../data/pokemons_repository_impl.dart';
-import 'entities/detailed_pokemon.dart';
+import 'entities/pokemon.dart';
 import 'entities/pokemon_list_response.dart';
 
 part 'pokedex_repository.g.dart';
@@ -14,9 +14,13 @@ PokedexRepository pokedexRepository(PokedexRepositoryRef ref) {
 }
 
 @riverpod
-Future<PokemonListResponse> getPokemonList(GetPokemonListRef ref, int offset) {
+Future<PokemonListResponse> getPokemonList(
+  GetPokemonListRef ref, {
+  required int offset,
+  int limit = 25,
+}) {
   final repository = ref.watch(pokedexRepositoryProvider);
-  return repository.getPokemonList(offset: offset);
+  return repository.getPokemonList(offset: offset, limit: limit);
 }
 
 @riverpod

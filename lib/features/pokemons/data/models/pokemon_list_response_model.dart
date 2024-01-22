@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_list_response.dart';
 
 part 'pokemon_list_response_model.freezed.dart';
@@ -39,7 +40,7 @@ class PokemonResultModel with _$PokemonResultModel {
 }
 
 extension PokemonModelX on PokemonResultModel {
-  String get id => url.split('/').reversed.elementAt(1);
+  int get id => int.parse(url.split('/').reversed.elementAt(1));
 
   /// TODO: Move this extension to presentation layer
   String get imageUrl =>

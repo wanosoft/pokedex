@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../domain/entities/detailed_pokemon.dart';
+import '../../domain/entities/pokemon.dart';
 
 part 'detailed_pokemon_model.freezed.dart';
 part 'detailed_pokemon_model.g.dart';

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../features/pokemons/presentation/favorites_screen.dart';
 import '../features/pokemons/presentation/pokemon_details_screen.dart';
-import '../features/pokemons/presentation/pokemons_screen.dart';
+import '../features/pokemons/presentation/pokemons_screen/pokemons_screen.dart';
 import 'presentation/home_screen.dart';
 import 'presentation/routes.dart';
 

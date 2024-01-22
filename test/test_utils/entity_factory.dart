@@ -1,5 +1,5 @@
 import 'package:pokedex/core/data/mock_data.dart';
-import 'package:pokedex/features/pokemons/domain/entities/detailed_pokemon.dart';
+import 'package:pokedex/features/pokemons/domain/entities/pokemon.dart';
 import 'package:pokedex/features/pokemons/domain/entities/pokemon_list_response.dart';
 
 PokemonListResponse createPokemonListResponse({
@@ -13,11 +13,11 @@ PokemonListResponse createPokemonListResponse({
 }
 
 PokemonResult createPokemonResult({
-  String? id,
+  int? id,
   String? name,
 }) {
   return PokemonResult(
-    id: id ?? pokemonId.toString(),
+    id: id ?? pokemonId,
     name: name ?? pokemonName,
   );
 }

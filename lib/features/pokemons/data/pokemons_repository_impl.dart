@@ -1,5 +1,5 @@
 import '../../../core/domain/entities/failure.dart';
-import '../domain/entities/detailed_pokemon.dart';
+import '../domain/entities/pokemon.dart';
 import '../domain/entities/pokemon_list_response.dart';
 import '../domain/pokedex_repository.dart';
 import 'data_sources/pokedex_remote_service.dart';

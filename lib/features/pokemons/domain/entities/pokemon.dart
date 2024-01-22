@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'detailed_pokemon.freezed.dart';
+part 'pokemon.freezed.dart';
 
 @freezed
-class DetailedPokemon with _$DetailedPokemon {
-  const factory DetailedPokemon({
+sealed class Pokemon with _$Pokemon {
+  const factory Pokemon.detailedPokemon({
     required int id,
     required String name,
     required int height,
@@ -12,7 +12,12 @@ class DetailedPokemon with _$DetailedPokemon {
     required List<PokemonType> types,
     required List<String> moves,
     required List<PokemonStat> stats,
-  }) = _DetailedPokemon;
+  }) = DetailedPokemon;
+
+  const factory Pokemon.pokemonResult({
+    required int id,
+    required String name,
+  }) = PokemonResult;
 }
 
 @freezed

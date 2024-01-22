@@ -4,7 +4,7 @@ import 'package:pokedex/core/data/mock_data.dart';
 import 'package:pokedex/core/domain/entities/failure.dart';
 import 'package:pokedex/features/pokemons/data/data_sources/pokedex_remote_service.dart';
 import 'package:pokedex/features/pokemons/data/pokemons_repository_impl.dart';
-import 'package:pokedex/features/pokemons/domain/entities/detailed_pokemon.dart';
+import 'package:pokedex/features/pokemons/domain/entities/pokemon.dart';
 import 'package:pokedex/features/pokemons/domain/entities/pokemon_list_response.dart';
 
 import '../../../test_utils/model_factory.dart';
