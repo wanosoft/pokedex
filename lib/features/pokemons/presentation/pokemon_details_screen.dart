@@ -25,34 +25,40 @@ class PokemonDetailsScreen extends ConsumerWidget {
             expandedHeight: 200,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              title: state.renderWhen((data) => Text(data.name)),
-              background: state.renderWhen(
-                (data) => Image.network(
+              title: Text(pokemon.name),
+              background: state.renderOrElse(
+                data: (data) => Image.network(
                   pokemon.imageUrl,
                   fit: BoxFit.cover,
                 ),
-              ),
+                orElse: () => const SizedBox.shrink(),
+              )!,
             ),
           ),
-          SliverList(
-            delegate: SliverChildListDelegate.fixed([
-              ListTile(
-                title: const Text('Height'),
-                subtitle: Text(state.data?.height.toString() ?? ''),
-              ),
-              ListTile(
-                title: const Text('Weight'),
-                subtitle: Text(state.data?.weight.toString() ?? ''),
-              ),
-              ListTile(
-                title: const Text('Types'),
-                subtitle: Text(state.data?.types.join(', ') ?? ''),
-              ),
-              ListTile(
-                title: const Text('Abilities'),
-                subtitle: Text(state.data?.abilities.join(', ') ?? ''),
-              ),
-            ]),
+          state.renderWhen(
+            (data) => SliverList(
+              delegate: SliverChildListDelegate.fixed([
+                ListTile(
+                  title: const Text('Height'),
+                  subtitle: Text(data.height.toString()),
+                ),
+                ListTile(
+                  title: const Text('Weight'),
+                  subtitle: Text(data.weight.toString()),
+                ),
+                ListTile(
+                  title: const Text('Types'),
+                  subtitle: Text(data.types.join(', ')),
+                ),
+                ListTile(
+                  title: const Text('Abilities'),
+                  subtitle: Text(data.moves.join(', ')),
+                ),
+              ]),
+            ),
+            onRetry: () =>
+                ref.refresh(getPokemonDetailsByIdProvider(pokemon.id)),
+            sliver: true,
           ),
         ],
       ),
