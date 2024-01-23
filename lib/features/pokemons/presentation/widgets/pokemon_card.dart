@@ -3,31 +3,28 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/presentation/routes.dart';
 import '../../domain/entities/pokemon.dart';
+import '../entity_extensions.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard._({
-    required this.id,
-    required this.name,
+    required this.pokemon,
     this.types = const [],
     super.key,
   });
-
-  final int id;
-  final String name;
+  
+  final Pokemon pokemon;
   final List<PokemonType> types;
 
   factory PokemonCard.fromPokemonResult(PokemonResult pokemon) {
     return PokemonCard._(
-      id: pokemon.id.toInt(),
-      name: pokemon.name,
+      pokemon: pokemon,
       key: Key(pokemon.id.toString()),
     );
   }
 
   factory PokemonCard.fromDetailedPokemon(DetailedPokemon pokemon) {
     return PokemonCard._(
-      id: pokemon.id,
-      name: pokemon.name,
+      pokemon: pokemon,
       types: pokemon.types,
       key: Key(pokemon.id.toString()),
     );
@@ -38,11 +35,10 @@ class PokemonCard extends StatelessWidget {
     return InkWell(
       onTap: () => context.pushNamed(
         PokedexRoutes.pokemon.name,
-        pathParameters: {pokemonIdKey: id.toString()},
+        extra: pokemon,
       ),
       child: Container(
         decoration: BoxDecoration(
-          // TODO: change color based on pokemon type
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
         ),
@@ -51,7 +47,7 @@ class PokemonCard extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  name,
+                  pokemon.name,
                   style: const TextStyle(fontSize: 20),
                 ),
               ],
@@ -61,7 +57,7 @@ class PokemonCard extends StatelessWidget {
               child: Image(
                 height: 100,
                 image: NetworkImage(
-                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png',
+                  pokemon.imageUrl,
                 ),
               ),
             ),

@@ -26,7 +26,7 @@ Future<PokemonListResponse> getPokemonList(
 @riverpod
 Future<DetailedPokemon> getPokemonDetailsById(
   GetPokemonDetailsByIdRef ref,
-  String id,
+  int id,
 ) {
   final repository = ref.watch(pokedexRepositoryProvider);
   return repository.getPokemonDetailsById(id);
@@ -38,5 +38,5 @@ abstract class PokedexRepository {
     int limit = 25,
   });
 
-  Future<DetailedPokemon> getPokemonDetailsById(String id);
+  Future<DetailedPokemon> getPokemonDetailsById(int id);
 }

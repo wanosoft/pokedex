@@ -41,8 +41,4 @@ class PokemonResultModel with _$PokemonResultModel {
 
 extension PokemonModelX on PokemonResultModel {
   int get id => int.parse(url.split('/').reversed.elementAt(1));
-
-  /// TODO: Move this extension to presentation layer
-  String get imageUrl =>
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
 }

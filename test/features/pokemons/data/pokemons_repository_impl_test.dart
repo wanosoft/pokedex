@@ -53,14 +53,13 @@ void main() {
     });
 
     group('get pokemon details by id', () {
-      final id = pokemonId.toString();
 
       test('should return a detailed pokemon', () async {
-        when(() => remoteService.getPokemonDetailsById(id)).thenAnswer(
+        when(() => remoteService.getPokemonDetailsById(pokemonId)).thenAnswer(
           (_) async => createDetailedPokemonModel(),
         );
 
-        final response = await repository.getPokemonDetailsById(id);
+        final response = await repository.getPokemonDetailsById(pokemonId);
 
         expect(
           response,
@@ -70,17 +69,17 @@ void main() {
             equals(pokemonName),
           ),
         );
-        verify(() => remoteService.getPokemonDetailsById(id)).called(1);
+        verify(() => remoteService.getPokemonDetailsById(pokemonId)).called(1);
         verifyNoMoreInteractions(remoteService);
       });
 
       test('should throw a failure', () {
-        when(() => remoteService.getPokemonDetailsById(id)).thenThrow(
+        when(() => remoteService.getPokemonDetailsById(pokemonId)).thenThrow(
           exception,
         );
 
         expectLater(
-          repository.getPokemonDetailsById(id),
+          repository.getPokemonDetailsById(pokemonId),
           throwsA(isA<UnknownFailure>()),
         );
       });

@@ -39,7 +39,7 @@ final _router = GoRouter(
       name: PokedexRoutes.pokemon.name,
       path: PokedexRoutes.pokemon.path,
       builder: (context, state) => PokemonDetailsScreen(
-        pokemonId: state.pathParameters['pokemonId'] as String,
+        pokemon: state.extra as Pokemon,
       ),
     ),
   ],
