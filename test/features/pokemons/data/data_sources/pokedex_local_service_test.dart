@@ -38,16 +38,6 @@ void main() {
       expect(result, [pokemon1, pokemon2]);
     });
 
-    test('should return true if pokemon is already saved', () async {
-      final pokemon = createDetailedPokemonModel();
-
-      await pokedexLocalService.savePokemon(pokemon);
-
-      final result = await pokedexLocalService.isPokemonAlreadySaved(pokemonId);
-
-      expect(result, true);
-    });
-
     test('should delete pokemon', () async {
       final pokemon = createDetailedPokemonModel();
 

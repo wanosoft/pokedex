@@ -17,18 +17,6 @@ class PokedexLocalService {
 
   final PokedexDatabase _database;
 
-  Future<bool> isPokemonAlreadySaved(int pokemonId) async {
-    try {
-      final savedPokemons = _database.select(_database.localPokemon)
-        ..where((table) => table.id.equals(pokemonId));
-      final pokemon = await savedPokemons.getSingleOrNull();
-
-      return pokemon != null;
-    } catch (e) {
-      return false;
-    }
-  }
-
   Future<List<DetailedPokemonModel>> getAllSavedPokemons() async {
     final pokemons = await _database.localPokemon.select().get();
     return pokemons
