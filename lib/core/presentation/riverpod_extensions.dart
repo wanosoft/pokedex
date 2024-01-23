@@ -21,6 +21,7 @@ extension AsyncValueExtension<T> on AsyncValue<T> {
     Widget Function()? loading,
     bool skipLoadingOnRefresh = true,
     bool skipLoadingOnReload = false,
+    bool sliver = false,
   }) {
     if (error == null) {
       assert(
@@ -38,15 +39,20 @@ extension AsyncValueExtension<T> on AsyncValue<T> {
           stackTrace: stackTrace,
         );
         if (error != null) return error(e, stackTrace);
-        return errorHandler(
+        final widget = errorHandler(
           e,
           stackTrace,
           onRetry: onRetry!,
         );
+
+        if (sliver) return SliverFillRemaining(child: widget);
+        return widget;
       },
       loading: () {
+        const widget = Center(child: CircularProgressIndicator());
         if (loading != null) return loading();
-        return const Center(child: CircularProgressIndicator());
+        if (sliver) return const SliverFillRemaining(child: widget);
+        return widget;
       },
       skipLoadingOnRefresh: skipLoadingOnRefresh,
       skipLoadingOnReload: skipLoadingOnReload,

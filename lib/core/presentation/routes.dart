@@ -1,6 +1,8 @@
+const pokemonIdKey = 'pokemonId';
+
 enum PokedexRoutes {
   pokemons('/pokemons'),
-  pokemon('/pokemon/:pokemonId'),
+  pokemon('/pokemon/:$pokemonIdKey'),
   favorites('/favorites');
 
   final String path;

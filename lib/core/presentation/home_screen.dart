@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'routes.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({
-    required this.child,
+    required this.navigationShell,
     super.key,
   });
 
-  final Widget child;
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  var _currentIndex = 0;
+  final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTap,
-        items: const [
+      body: navigationShell,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: navigationShell.currentIndex,
+        onDestinationSelected: _onDestinationSelected,
+        destinations: const [
           // TODO: Change the icons
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+          NavigationDestination(
+            icon: Icon(Icons.pets),
             label: 'Pokemons',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.favorite),
             label: 'Favorites',
           ),
@@ -39,13 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _onTap(int value) {
-    if (value == 0) {
-      context.go(PokedexRoutes.pokemons.path);
-    } else {
-      context.go(PokedexRoutes.favorites.path);
-    }
-
-    setState(() => _currentIndex = value);
+  void _onDestinationSelected(int index) {
+    navigationShell.goBranch(
+      index,
+      initialLocation: index == navigationShell.currentIndex,
+    );
   }
 }
