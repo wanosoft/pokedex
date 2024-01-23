@@ -7,8 +7,7 @@ import 'package:pokedex/features/pokemons/domain/entities/pokemon_list_response.
 import 'package:pokedex/features/pokemons/domain/pokedex_repository.dart';
 
 import '../../../test_utils/entity_factory.dart';
-
-class MockPokedexRepository extends Mock implements PokedexRepository {}
+import '../../../test_utils/mocks.dart';
 
 void main() {
   group('pokedex repository', () {
