@@ -178,13 +178,14 @@ class StatNameConverter implements JsonConverter<String, Map<String, dynamic>> {
 
   @override
   Map<String, dynamic> toJson(String object) {
-    throw UnimplementedError();
+    return {
+      'name': object,
+    };
   }
 }
 
 class PokemonTypesModelConverter
-    implements
-        JsonConverter<List<PokemonTypeModel>, List<dynamic>> {
+    implements JsonConverter<List<PokemonTypeModel>, List<dynamic>> {
   const PokemonTypesModelConverter();
 
   @override
@@ -194,7 +195,15 @@ class PokemonTypesModelConverter
 
   @override
   List<Map<String, dynamic>> toJson(List<PokemonTypeModel> object) {
-    throw UnimplementedError();
+    return object
+        .map(
+          (e) => {
+            'type': {
+              'name': e.toPokemonType().name,
+            }
+          },
+        )
+        .toList();
   }
 }
 
@@ -209,6 +218,14 @@ class PokemonMovesConverter
 
   @override
   List<Map<String, dynamic>> toJson(List<String> object) {
-    throw UnimplementedError();
+    return object
+        .map(
+          (e) => {
+            'move': {
+              'name': e,
+            }
+          },
+        )
+        .toList();
   }
 }
