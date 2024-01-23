@@ -17,7 +17,6 @@ class HomeScreen extends StatelessWidget {
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: _onDestinationSelected,
         destinations: const [
-          // TODO: Change the icons
           NavigationDestination(
             icon: Icon(Icons.pets),
             label: 'Pokemons',

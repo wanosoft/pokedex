@@ -33,7 +33,7 @@ class _PokemonsScreenState extends ConsumerState<FetchedPokemonsScreen> {
     return Scaffold(
       backgroundColor: Colors.green,
       body: CustomScrollView(
-        key: const Key('pokemons-screen'),
+        key: const Key('fetched-pokemons-screen'),
         controller: _controller,
         slivers: [
           SliverAppBar(

@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/presentation/routes.dart';
 import '../../domain/entities/pokemon.dart';
 import '../entity_extensions.dart';
 
-class PokemonCard extends StatelessWidget {
+class PokemonCard extends ConsumerWidget {
   const PokemonCard._({
     required this.pokemon,
-    this.types = const [],
     super.key,
   });
-  
+
   final Pokemon pokemon;
-  final List<PokemonType> types;
+
+  bool get isDetailed => pokemon is DetailedPokemon;
 
   factory PokemonCard.fromPokemonResult(PokemonResult pokemon) {
     return PokemonCard._(
@@ -25,13 +26,12 @@ class PokemonCard extends StatelessWidget {
   factory PokemonCard.fromDetailedPokemon(DetailedPokemon pokemon) {
     return PokemonCard._(
       pokemon: pokemon,
-      types: pokemon.types,
       key: Key(pokemon.id.toString()),
     );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context, ref) {
     return InkWell(
       onTap: () => context.pushNamed(
         PokedexRoutes.pokemon.name,
@@ -59,6 +59,18 @@ class PokemonCard extends StatelessWidget {
                 image: NetworkImage(
                   pokemon.imageUrl,
                 ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.favorite_border,
+                  color: Colors.red,
+                ),
+                onPressed: () {
+                  // TODO: Save/Remove pokemon from favorites
+                },
               ),
             ),
           ],
