@@ -22,6 +22,23 @@ class DetailedPokemonModel with _$DetailedPokemonModel {
   factory DetailedPokemonModel.fromJson(Map<String, dynamic> json) =>
       _$DetailedPokemonModelFromJson(json);
 
+  factory DetailedPokemonModel.fromDetailedPokemon(
+    DetailedPokemon detailedPokemon,
+  ) =>
+      DetailedPokemonModel(
+        id: detailedPokemon.id,
+        name: detailedPokemon.name,
+        height: detailedPokemon.height,
+        weight: detailedPokemon.weight,
+        types: detailedPokemon.types
+            .map((e) => PokemonTypeModel.fromPokemonType(e))
+            .toList(),
+        moves: detailedPokemon.moves,
+        stats: detailedPokemon.stats
+            .map((e) => PokemonStatModel.fromPokemonStat(e))
+            .toList(),
+      );
+
   DetailedPokemon toDetailedPokemon() => DetailedPokemon(
         id: id,
         name: name,
@@ -45,6 +62,13 @@ class PokemonStatModel with _$PokemonStatModel {
 
   factory PokemonStatModel.fromJson(Map<String, dynamic> json) =>
       _$PokemonStatModelFromJson(json);
+
+  factory PokemonStatModel.fromPokemonStat(PokemonStat pokemonStat) =>
+      PokemonStatModel(
+        baseStat: pokemonStat.baseStat,
+        effort: pokemonStat.effort,
+        statName: pokemonStat.statName,
+      );
 
   PokemonStat toPokemonStat() => PokemonStat(
         baseStat: baseStat,
@@ -119,6 +143,51 @@ enum PokemonTypeModel {
         return PokemonTypeModel.shadow;
       default:
         throw Exception('Unknown type');
+    }
+  }
+
+  static PokemonTypeModel fromPokemonType(PokemonType pokemonType) {
+    switch (pokemonType) {
+      case PokemonType.normal:
+        return PokemonTypeModel.normal;
+      case PokemonType.fighting:
+        return PokemonTypeModel.fighting;
+      case PokemonType.flying:
+        return PokemonTypeModel.flying;
+      case PokemonType.poison:
+        return PokemonTypeModel.poison;
+      case PokemonType.ground:
+        return PokemonTypeModel.ground;
+      case PokemonType.rock:
+        return PokemonTypeModel.rock;
+      case PokemonType.bug:
+        return PokemonTypeModel.bug;
+      case PokemonType.ghost:
+        return PokemonTypeModel.ghost;
+      case PokemonType.steel:
+        return PokemonTypeModel.steel;
+      case PokemonType.fire:
+        return PokemonTypeModel.fire;
+      case PokemonType.water:
+        return PokemonTypeModel.water;
+      case PokemonType.grass:
+        return PokemonTypeModel.grass;
+      case PokemonType.electric:
+        return PokemonTypeModel.electric;
+      case PokemonType.psychic:
+        return PokemonTypeModel.psychic;
+      case PokemonType.ice:
+        return PokemonTypeModel.ice;
+      case PokemonType.dragon:
+        return PokemonTypeModel.dragon;
+      case PokemonType.dark:
+        return PokemonTypeModel.dark;
+      case PokemonType.fairy:
+        return PokemonTypeModel.fairy;
+      case PokemonType.unknown:
+        return PokemonTypeModel.unknown;
+      case PokemonType.shadow:
+        return PokemonTypeModel.shadow;
     }
   }
 
