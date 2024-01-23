@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/core/data/mock_data.dart';
 import 'package:pokedex/features/pokemons/domain/pokedex_repository.dart';
+import 'package:pokedex/features/pokemons/domain/use_cases/fetch_and_save_detailed_pokemon_use_case.dart';
 import 'package:pokedex/features/pokemons/presentation/saved_pokemons/saved_pokemons_state.dart';
 
 import '../../../../test_utils/entity_factory.dart';
@@ -11,14 +12,21 @@ import '../../../../test_utils/test_utils.dart';
 
 void main() {
   late MockPokedexRepository pokedexRepository;
+  late MockFetchAndSaveDetailedPokemonUseCase
+      fetchAndSaveDetailedPokemonUseCase;
   late ProviderContainer container;
 
   setUp(() {
     pokedexRepository = MockPokedexRepository();
+    fetchAndSaveDetailedPokemonUseCase =
+        MockFetchAndSaveDetailedPokemonUseCase();
 
     container = createContainer(
       overrides: [
         pokedexRepositoryProvider.overrideWith((ref) => pokedexRepository),
+        fetchAndSaveDetailedPokemonUseCaseProvider.overrideWith(
+          (ref) => fetchAndSaveDetailedPokemonUseCase,
+        ),
       ],
     );
   });
@@ -96,5 +104,38 @@ void main() {
       verify(() => pokedexRepository.deletePokemon(pokemonId)).called(1);
       verifyNoMoreInteractions(pokedexRepository);
     });
+
+    test(
+      'should fetch and save detailed pokemon and add it to the state',
+      () async {
+        final pokemon = createDetailedPokemon();
+        final expected = [pokemon];
+        when(
+          () => pokedexRepository.getAllSavedPokemons(),
+        ).thenAnswer((_) async => []);
+        when(
+          () => fetchAndSaveDetailedPokemonUseCase(pokemonId),
+        ).thenAnswer((_) async => pokemon);
+
+        final initialState =
+            await container.read(savedPokemonsStateProvider.notifier).build();
+
+        expect(initialState, isEmpty);
+
+        await container
+            .read(savedPokemonsStateProvider.notifier)
+            .fetchAndSavePokemonById(pokemonId);
+
+        final result =
+            container.read(savedPokemonsStateProvider.notifier).state;
+
+        expect(result.value, expected);
+
+        verify(() => fetchAndSaveDetailedPokemonUseCase(pokemonId)).called(1);
+        verify(() => pokedexRepository.getAllSavedPokemons()).called(1);
+        verifyNoMoreInteractions(fetchAndSaveDetailedPokemonUseCase);
+        verifyNoMoreInteractions(pokedexRepository);
+      },
+    );
   });
 }

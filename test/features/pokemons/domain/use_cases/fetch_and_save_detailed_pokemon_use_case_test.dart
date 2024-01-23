@@ -27,7 +27,7 @@ void main() {
 
       final result = await useCase(pokemonId);
 
-      expect(result, equals(pokemonId));
+      expect(result, equals(detailedPokemon));
       verify(() => repository.getPokemonDetailsById(pokemonId)).called(1);
       verify(() => repository.savePokemon(detailedPokemon)).called(1);
       verifyNoMoreInteractions(repository);

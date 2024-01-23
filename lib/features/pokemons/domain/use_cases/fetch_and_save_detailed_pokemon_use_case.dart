@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../entities/pokemon.dart';
 import '../pokedex_repository.dart';
 
 part 'fetch_and_save_detailed_pokemon_use_case.g.dart';
@@ -18,13 +19,13 @@ class FetchAndSaveDetailedPokemonUseCase {
 
   FetchAndSaveDetailedPokemonUseCase(this._pokedexRepository);
 
-  Future<int> call(int pokemonId) async {
+  Future<DetailedPokemon> call(int pokemonId) async {
     try {
       final detailedPokemon = await _pokedexRepository.getPokemonDetailsById(
         pokemonId,
       );
-
-      return await _pokedexRepository.savePokemon(detailedPokemon);
+      await _pokedexRepository.savePokemon(detailedPokemon);
+      return detailedPokemon;
     } catch (_) {
       rethrow;
     }
