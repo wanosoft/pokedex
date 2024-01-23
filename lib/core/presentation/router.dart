@@ -27,7 +27,7 @@ final _router = GoRouter(
               name: PokedexRoutes.favorites.name,
               path: PokedexRoutes.favorites.path,
               pageBuilder: (_, __) => const NoTransitionPage(
-                child: FavoritesScreen(),
+                child: SavedPokemonsScreen(),
               ),
             ),
           ],
